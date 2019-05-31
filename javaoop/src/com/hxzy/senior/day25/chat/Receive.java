@@ -1,4 +1,4 @@
-package com.hxzy.senior.day25;
+package com.hxzy.senior.day25.chat;
 
 import java.io.BufferedReader;
 import java.io.IOException;
