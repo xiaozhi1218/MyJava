@@ -6,7 +6,7 @@ import java.util.Scanner;
  * @author chenyongzhi
  * @title: ScoreLever
  * @projectName MyJava
- * @description: TODO
+ * @description:
  * @date 2019/4/26 10:05
  */
 public class ScoreLever {
