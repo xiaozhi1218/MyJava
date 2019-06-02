@@ -1,6 +1,7 @@
 package com.atguigu.senior.day11.java2;
 
-import com.atguigu.java1.Person;
+
+import com.atguigu.senior.day11.java1.Person;
 import org.junit.Test;
 
 import java.lang.annotation.Annotation;
