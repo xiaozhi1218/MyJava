@@ -1,4 +1,4 @@
-package oop.senior.day19_reflection;
+package oop.senior.day19_reflection.exer1;
 
 import org.junit.Test;
 
@@ -12,7 +12,7 @@ import java.util.Random;
 public class NewInstanceTest {
 
     @Test
-    public void test1() throws IllegalAccessException, InstantiationException {
+    public void test1() throws Exception {
         Class<Person> personClass = Person.class;
 
          /*
@@ -39,18 +39,29 @@ public class NewInstanceTest {
             String classPath = "";
             switch (num) {
                 case 0:
-                    classPath = "java.util.Data";
+                    classPath = "java.util.Date";
                     break;
                 case 1:
                     classPath = "java.lang.Object";
                     break;
                 case 2:
-                    classPath = "oop.senior.day19_reflection.Person";
+                    classPath = "oop.senior.day19_reflection.exer1.Person";
                     break;
             }
 
 
+            try {
+                Object obj = getInstance(classPath);
+                System.out.println(obj);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+    }
+
+    public Object getInstance(String classPath) throws Exception {
+        Class aClass = Class.forName(classPath);
+        return aClass.newInstance();
     }
 
 }
