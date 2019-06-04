@@ -26,6 +26,9 @@ public class MobileCard implements Serializable {
 
     private ServicePackage setPackage;//所属套餐
 
+    public MobileCard() {
+    }
+
     /**
      * 用户注册
      *

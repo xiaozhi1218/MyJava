@@ -68,7 +68,7 @@ public class CardUtil implements Serializable {
         return false;
     }
 
-    //花费充值确认
+    //话费充值确认
     public static boolean isExistCard(String number) {
         Set<String> numbers = cards.keySet();
         Iterator<String> iterator = numbers.iterator();
@@ -304,7 +304,7 @@ public class CardUtil implements Serializable {
      *
      * @param number
      */
-    public static void printConsumeInfo(String number) {
+    public static void printConsumInfo(String number) {
         try {
             BufferedWriter br = new BufferedWriter(new FileWriter("test.txt"));
             Set<String> numbers = consumeInfos.keySet();
@@ -339,6 +339,7 @@ public class CardUtil implements Serializable {
 
     /**
      * 花费充值
+     *
      * @param number
      * @param money
      */

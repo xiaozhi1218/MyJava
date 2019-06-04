@@ -44,14 +44,33 @@ public class NetPackage extends ServicePackage
 
     /**
      * 流量使用情况
+     *
      * @param flow
      * @param card
      * @return 流量使用
      */
     @Override
     public int netPlay(int flow, MobileCard card) {
-        //TODO:netPlay
-        return 0;
+        int temp = flow;
+        for (int i = 0; i < flow; i++) {
+            //当总流量多余使用流量，使用流量++
+            if (this.flow - card.getRealFlow() >= 1) {
+                card.setRealFlow(card.getRealFlow() + 1);
+            }
+             //当流量用超，使用流量++，账号余额--，花销++
+            else if (card.getMoney() >= 0.1) {
+                card.setRealFlow(card.getRealFlow() + 1);
+                card.setMoney(card.getMoney() - 0.1);
+                card.setConsumAmount(card.getConsumAmount() + 0.1);
+            }
+            //当账号没钱时，提示充值
+            else {
+                temp = i;
+                System.out.println("流量已经使用" + i + "MB，您的余额不足，请充值后使用！");
+                break;
+            }
+        }
+        return temp;
     }
 
     @Override

@@ -64,13 +64,60 @@ public class TalkPackage extends ServicePackage
 
     @Override
     public int call(int minCount, MobileCard card) {
-        //TODO:implement
-        return 0;
+        int temp = minCount;
+        for (int i = 0; i < minCount; i++) {
+            /*
+            当套餐总通话时间大于实际通话时间，实际通话时间++
+             */
+            if (this.talkTime - card.getRealTalkTime() >= 1) {
+                card.setRealTalkTime(card.getRealTalkTime() + 1);
+            }
+            /*
+            如果话费用完，还剩余额的话，通话++，余额--，话费++
+             */
+            else if (card.getMoney() >= 0.2) {
+                card.setRealTalkTime(card.getRealTalkTime() + 1);
+                card.setMoney(card.getMoney() - 0.2);
+                card.setConsumAmount(card.getConsumAmount() + 0.2);
+            }
+            /*
+            如果余额不够的话，提示充值
+             */
+            else {
+                temp = i;
+                System.out.println("您已通话：" + i + "分钟,您的余额不足，请充值。");
+                break;
+            }
+        }
+        return temp;
     }
 
     @Override
     public int send(int count, MobileCard card) {
-        //TODO:implement
-        return 0;
+        int temp = smsCount;
+        for (int i = 0; i < smsCount; i++) {
+            /*
+            短信充足，使用短信++
+             */
+            if (this.smsCount - card.getRealSMSCount() >= 1) {
+                card.setRealSMSCount(card.getRealSMSCount() + 1);
+            }
+            /*
+            短信不够，剩余余额
+             */
+            else if (card.getMoney() >= 0.1) {
+                card.setRealSMSCount(card.getRealSMSCount() + 1);
+                card.setMoney(card.getMoney() - 0.1);
+                card.setConsumAmount(card.getConsumAmount() + 0.1);
+            }
+            /*
+            余额不足，提示充值
+             */
+            else {
+                temp = i;
+                System.out.println("您短信已经发送了" + i + "条，您的余额不足，请充值后再使用");
+            }
+        }
+        return temp;
     }
 }
