@@ -24,9 +24,10 @@ public class MobileMain implements Serializable {
     public static void main(String[] args) {
 
         CardUtil.loadData();
+        CardUtil.initScene();
+        CardUtil.saveData();
         MobileMain mobileMain = new MobileMain();
         mobileMain.mainMenu();
-        CardUtil.saveData();
 
     }
 
