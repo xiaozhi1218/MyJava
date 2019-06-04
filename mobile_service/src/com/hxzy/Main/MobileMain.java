@@ -30,7 +30,9 @@ public class MobileMain implements Serializable {
 
     }
 
-    //主菜单
+    /**
+     * 主菜单
+     */
     public void mainMenu() {
 
         do {
@@ -44,7 +46,7 @@ public class MobileMain implements Serializable {
                     input = scanner.nextInt();
 
                 } catch (InputMismatchException e) {
-                    System.out.println("请输入数字1-6！");
+                    System.out.println("请输入数字1-6!");
                     scanner.nextLine();
                     //input = scanner.nextInt();
                 }
@@ -57,7 +59,7 @@ public class MobileMain implements Serializable {
                     login();
                     continue;
                 case 2:
-                    registCard();
+                    registerCard();
                     continue;
                 case 3:
                     useSosoMenu();
@@ -89,11 +91,10 @@ public class MobileMain implements Serializable {
         }
     }
 
-    /*
-     *
-     * */
-    //注册二级菜单
-    private void registCard() {
+    /**
+     * 注册二级菜单
+     */
+    private void registerCard() {
         //Scanner scanner1 = new Scanner(System.in);
         MobileCard mobileCard = new MobileCard();
         System.out.println("*******可选择的卡号*******");
@@ -193,18 +194,16 @@ public class MobileMain implements Serializable {
         card.showMeg();
     }
 
-    /*
-     *
-     *
-     * */
-    //登陆二级菜单
+    /**
+     * 登录二级菜单
+     */
     public void login() {
         System.out.println("请输入手机卡号：");
         scanner.nextLine();
-        String cardNum = scanner.nextLine();
+        String cardNumber = scanner.nextLine();
         System.out.println("请输入密码：");
         String passWord = scanner.nextLine();
-        if (CardUtil.isExistCard(cardNum, passWord)) {
+        if (CardUtil.isExistCard(cardNumber, passWord)) {
             System.out.println("登陆成功！");
         } else {
             return;
@@ -229,20 +228,20 @@ public class MobileMain implements Serializable {
             }
             switch (input) {
                 case 1:
-                    CardUtil.showAmountDetail(cardNum);
+                    CardUtil.showAmountDetail(cardNumber);
                     continue;
                 case 2:
-                    CardUtil.showRemainDetail(cardNum);
+                    CardUtil.showRemainDetail(cardNumber);
                     continue;
                 case 3:
-                    CardUtil.printConsumInfo(cardNum);
+                    CardUtil.printConsumInfo(cardNumber);
                     continue;
                 case 4:
-                    changingPackMenu(cardNum);
+                    changingPackMenu(cardNumber);
                     CardUtil.saveData();
                     continue;
                 case 5:
-                    CardUtil.delCard(cardNum);
+                    CardUtil.delCard(cardNumber);
                     CardUtil.saveData();
                     new MobileMain().mainMenu();
                     continue;
@@ -254,9 +253,9 @@ public class MobileMain implements Serializable {
         while (true);
     }
 
-    /*
+    /**
      * 话费充值菜单
-     * */
+     */
     public void moneyRecharge() {
 
         System.out.println("请输入手机卡号：");
@@ -266,16 +265,16 @@ public class MobileMain implements Serializable {
             double money = scanner.nextInt();
             CardUtil.chargeMoney(number, money);
             System.out.println("充值成功，当前话费余额为：" + CardUtil.getCard(number).getMoney() + "元");
-
         } else {
             System.out.println("手机输入有误，请重新输入手机号！");
 
         }
     }
 
-    /*
-     * 套餐变更菜单
-     * */
+    /**
+     * 套餐变更餐单
+     * @param cardNum
+     */
     public void changingPackMenu(String cardNum) {
         System.out.println("*********************套餐变更*********************");
         System.out.println("请选择您想改变的套餐：\n1.话唠套餐 2.网虫套餐 3.超人套餐 \n请选择：");
