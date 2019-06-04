@@ -3,6 +3,7 @@ package com.hxzy.service;
 import com.hxzy.entity.MobileCard;
 
 /**
+ * 网络服务
  * @author chenyongzhi
  * @create 2019/6/3 16:05
  */

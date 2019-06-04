@@ -1,12 +1,15 @@
 package com.hxzy.util;
 
 import com.hxzy.entity.*;
+import com.hxzy.service.CallService;
+import com.hxzy.service.SendService;
 
 import java.io.*;
 import java.text.DecimalFormat;
 import java.util.*;
 
 /**
+ * 操作工具类
  * @author chenyongzhi
  * @create 2019/6/3 16:16
  */
@@ -16,9 +19,16 @@ public class CardUtil implements Serializable {
 
     private static Map<String, List<ConsumInfo>> consumeInfos = new HashMap<>();
 
-    //static Map<Integer, Scene> sceneMap = new HashMap<>();
+    static Map<Integer, Scene> sceneMap = new HashMap<>();
 
-    public static File file = new File("data.dat");
+    static File file = new File("data.dat");
+
+    static Scene scene1 = new Scene("通话",100,"给朋友打电话，通话100分钟");
+    static Scene scene2 = new Scene("通话",20,"给家人打电话，通话20分钟");
+    static Scene scene4 = new Scene("短信",10,"给父母发短信，发送短信10条");
+    static Scene scene3 = new Scene("短信",100,"给朋友发短信，发送短信100条");
+    static Scene scene5 = new Scene("上网",2*1024,"看电影，使用流量2GB");
+    static Scene scene6 = new Scene("上网",500,"玩游戏，使用流量500MB");
 
     /**
      * 保存信息
@@ -144,7 +154,7 @@ public class CardUtil implements Serializable {
         int remainTalkTime, remainSmsCount, remainFlow;
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append("您的卡号是" + number + ",套餐内剩余: \n");
-        ServicePackage servicePackage = card.getSetPackage();
+        ServicePackage servicePackage = card.getSerPackage();
 
         if (servicePackage instanceof NetPackage) {
             NetPackage netPackage = (NetPackage) servicePackage;
@@ -178,9 +188,9 @@ public class CardUtil implements Serializable {
         MobileCard mobileCard = cards.get(number);
         stringBuffer.append("***********************************\n");
         stringBuffer.append("您的卡号：" + mobileCard.getCardNumber() + "\n当月账单:\n");
-        stringBuffer.append("您的套餐：" + mobileCard.getSetPackage().getName() + "\n");
-        stringBuffer.append("套餐资费：" + mobileCard.getSetPackage().getPrice() + "元\n");
-        stringBuffer.append("合计:" + dataFormat((mobileCard.getConsumAmount() + mobileCard.getSetPackage().getPrice())) + "元\n");
+        stringBuffer.append("您的套餐：" + mobileCard.getSerPackage().getName() + "\n");
+        stringBuffer.append("套餐资费：" + mobileCard.getSerPackage().getPrice() + "元\n");
+        stringBuffer.append("合计:" + dataFormat((mobileCard.getConsumAmount() + mobileCard.getSerPackage().getPrice())) + "元\n");
         stringBuffer.append("账号余额:" + dataFormat(mobileCard.getMoney()) + "元");
         System.out.println(stringBuffer);
     }
@@ -213,7 +223,73 @@ public class CardUtil implements Serializable {
     }
 
     public static void useSoso(String number) {
+        sceneMap.put(0, scene1);
+        sceneMap.put(1, scene2);
+        sceneMap.put(2, scene3);
+        sceneMap.put(3, scene4);
+        sceneMap.put(4, scene5);
+        sceneMap.put(5, scene6);
 
+        MobileCard card = cards.get(number);
+        ServicePackage pack = card.getSerPackage();
+        Random random = new Random();
+        int ranNum = 0;
+        int temp = 0;
+        do {
+            ranNum = random.nextInt(6);
+            Scene scene = sceneMap.get(ranNum);
+            switch (ranNum) {
+                //通话场景
+                case 0:
+                case 1:
+                    if (pack instanceof CallService) {
+                        System.out.println(scene.getDescription());
+                        CallService callService = (CallService) pack;
+                        try {
+                            temp = callService.call(scene.getData(), card);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        addConsumInfo(number, new ConsumInfo(number, scene.getType(), temp));
+                        break;
+                    } else {
+                        continue;
+                    }
+                    //短信场景
+                case 2:
+                case 3:
+                    if (pack instanceof SendService) {
+                        System.out.println(scene.getDescription());
+                        SendService sendService = (SendService) pack;
+                        try {
+                            temp = sendService.send(scene.getData(), card);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        addConsumInfo(number, new ConsumInfo(number, scene.getType(), temp));
+                        break;
+                    } else {
+                        continue;
+                    }
+                    //流量场景
+                case 4:
+                case 5:
+                    if (pack instanceof NetPackage) {
+                        System.out.println(scene.getDescription());
+                        NetPackage netPackage = (NetPackage) pack;
+                        try {
+                            temp = netPackage.netPlay(scene.getData(), card);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        addConsumInfo(number, new ConsumInfo(number, scene.getType(), temp));
+                        break;
+                    } else {
+                        continue;
+                    }
+            }
+            break;
+        } while (true);
     }
 
     /**
@@ -230,7 +306,6 @@ public class CardUtil implements Serializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     /**
@@ -243,54 +318,54 @@ public class CardUtil implements Serializable {
 
         switch (packNum) {
             case 1:
-                if (cards.get(number).getSetPackage() instanceof TalkPackage) {
+                if (cards.get(number).getSerPackage() instanceof TalkPackage) {
                     System.out.println("您已是该套餐用户，无法更换");
                 } else {
-                    if (cards.get(number).getMoney() < cards.get(number).getSetPackage().getPrice()) {
+                    if (cards.get(number).getMoney() < cards.get(number).getSerPackage().getPrice()) {
                         System.out.println("您的余额不足以支付本月套餐资费，请充值后再办理.");
                     } else {
                         cards.get(number).setRealTalkTime(0);
                         cards.get(number).setRealSMSCount(0);
                         cards.get(number).setRealFlow(0);
-                        cards.get(number).setSetPackage(createPackage(packNum));
+                        cards.get(number).setSerPackage(createPackage(packNum));
                         //减去月资费
-                        cards.get(number).setMoney(cards.get(number).getMoney() - cards.get(number).getSetPackage().getPrice());
+                        cards.get(number).setMoney(cards.get(number).getMoney() - cards.get(number).getSerPackage().getPrice());
                         System.out.println("套餐变更成功！");
                         createPackage(packNum).showInfo();
                     }
                 }
                 break;
             case 2:
-                if (cards.get(number).getSetPackage() instanceof NetPackage) {
+                if (cards.get(number).getSerPackage() instanceof NetPackage) {
                     System.out.println("您已经是该套餐用户，无需换套餐。");
                 } else {
-                    if (cards.get(number).getMoney() < cards.get(number).getSetPackage().getPrice()) {
+                    if (cards.get(number).getMoney() < cards.get(number).getSerPackage().getPrice()) {
                         System.out.println("您的余额不足以支付本月套餐资费，请充值后再办理。");
                     } else {
                         cards.get(number).setRealTalkTime(0);
                         cards.get(number).setRealSMSCount(0);
                         cards.get(number).setRealFlow(0);
-                        cards.get(number).setSetPackage(createPackage(packNum));
+                        cards.get(number).setSerPackage(createPackage(packNum));
                         //减去月资费
-                        cards.get(number).setMoney(cards.get(number).getMoney() - cards.get(number).getSetPackage().getPrice());
+                        cards.get(number).setMoney(cards.get(number).getMoney() - cards.get(number).getSerPackage().getPrice());
                         System.out.println("套餐变更成功！");
                         createPackage(packNum).showInfo();
                     }
                 }
                 break;
             case 3:
-                if (cards.get(number).getSetPackage() instanceof SuperPackage) {
+                if (cards.get(number).getSerPackage() instanceof SuperPackage) {
                     System.out.println("您已经是该套餐用户，无需换套餐。");
                 } else {
-                    if (cards.get(number).getMoney() < cards.get(number).getSetPackage().getPrice()) {
+                    if (cards.get(number).getMoney() < cards.get(number).getSerPackage().getPrice()) {
                         System.out.println("您的余额不足以支付本月套餐资费，请充值后再办理。");
                     } else {
                         cards.get(number).setRealTalkTime(0);
                         cards.get(number).setRealSMSCount(0);
                         cards.get(number).setRealFlow(0);
-                        cards.get(number).setSetPackage(createPackage(packNum));
+                        cards.get(number).setSerPackage(createPackage(packNum));
                         //减去月资费
-                        cards.get(number).setMoney(cards.get(number).getMoney() - cards.get(number).getSetPackage().getPrice());
+                        cards.get(number).setMoney(cards.get(number).getMoney() - cards.get(number).getSerPackage().getPrice());
                         System.out.println("套餐变更成功！");
                         createPackage(packNum).showInfo();
                     }

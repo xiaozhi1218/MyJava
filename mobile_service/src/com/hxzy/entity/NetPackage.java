@@ -5,6 +5,7 @@ import com.hxzy.service.NetService;
 import java.io.Serializable;
 
 /**
+ * 网虫套餐
  * @author chenyongzhi
  * @create 2019/6/3 15:46
  */

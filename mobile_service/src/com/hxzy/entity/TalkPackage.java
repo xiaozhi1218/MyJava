@@ -6,6 +6,7 @@ import com.hxzy.service.SendService;
 import java.io.Serializable;
 
 /**
+ * 话痨套餐
  * @author chenyongzhi
  * @create 2019/6/3 15:31
  */

@@ -1,6 +1,7 @@
 package com.hxzy.entity;
 
 /**
+ * 用户消费信息
  * @author chenyongzhi
  * @create 2019/6/3 15:55
  */

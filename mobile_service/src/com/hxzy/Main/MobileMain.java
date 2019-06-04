@@ -150,7 +150,7 @@ public class MobileMain implements Serializable {
                 if (packageNum <= 3 && packageNum >= 1) {
                     //存套餐
                     servicePackage = CardUtil.createPackage(packageNum);
-                    mobileCard.setSetPackage(servicePackage);
+                    mobileCard.setSerPackage(servicePackage);
                     break;
                 } else {
                     System.out.println("请重新输入（数字1-3）：");
@@ -187,7 +187,7 @@ public class MobileMain implements Serializable {
         //现在的余额是是减去月租后的
         mobileCard.setMoney(money - servicePackage.getPrice());
         //新对象
-        MobileCard card = new MobileCard(mobileCard.getCardNumber(), userName, passWord, mobileCard.getMoney(), mobileCard.getSetPackage());
+        MobileCard card = new MobileCard(mobileCard.getCardNumber(), userName, passWord, mobileCard.getMoney(), mobileCard.getSerPackage());
         CardUtil.addCard(card);
         CardUtil.saveData();
         System.out.println("注册完成！");

@@ -1,6 +1,7 @@
 package com.hxzy.entity;
 
 /**
+ * 使用场景
  * @author chenyongzhi
  * @create 2019/6/3 15:56
  */

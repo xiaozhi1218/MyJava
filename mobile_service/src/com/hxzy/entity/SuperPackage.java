@@ -7,6 +7,7 @@ import com.hxzy.service.SendService;
 import java.io.Serializable;
 
 /**
+ * 超人套餐
  * @author chenyongzhi
  * @create 2019/6/3 15:54
  */
@@ -99,7 +100,6 @@ public class SuperPackage extends ServicePackage
     public int send(int count, MobileCard card) {
         int temp = count;
         for (int i = 0; i < count; i++) {
-
             /*
             短信充足，使用短信++
              */

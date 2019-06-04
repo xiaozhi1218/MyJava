@@ -3,6 +3,7 @@ package com.hxzy.entity;
 import java.io.Serializable;
 
 /**
+ * 服务套餐
  * @author chenyongzhi
  * @create 2019/6/3 15:27
  */

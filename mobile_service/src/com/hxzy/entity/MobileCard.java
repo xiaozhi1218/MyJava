@@ -3,6 +3,7 @@ package com.hxzy.entity;
 import java.io.Serializable;
 
 /**
+ * 移动电话卡信息
  * @author chenyongzhi
  * @create 2019/6/3 15:31
  */
@@ -24,7 +25,7 @@ public class MobileCard implements Serializable {
 
     private int realFlow;//当月上网流量
 
-    private ServicePackage setPackage;//所属套餐
+    private ServicePackage serPackage;//所属套餐
 
     public MobileCard() {
     }
@@ -36,14 +37,14 @@ public class MobileCard implements Serializable {
      * @param userName
      * @param passWord
      * @param money
-     * @param setPackage
+     * @param serPackage
      */
-    public MobileCard(String cardNumber, String userName, String passWord, double money, ServicePackage setPackage) {
+    public MobileCard(String cardNumber, String userName, String passWord, double money, ServicePackage serPackage) {
         this.cardNumber = cardNumber;
         this.userName = userName;
         this.passWord = passWord;
         this.money = money;
-        this.setPackage = setPackage;
+        this.serPackage = serPackage;
     }
 
     /**
@@ -57,9 +58,9 @@ public class MobileCard implements Serializable {
      * @param realTalkTime
      * @param realSMSCount
      * @param realFlow
-     * @param setPackage
+     * @param serPackage
      */
-    public MobileCard(String cardNumber, String userName, String passWord, double consumAmount, double money, int realTalkTime, int realSMSCount, int realFlow, ServicePackage setPackage) {
+    public MobileCard(String cardNumber, String userName, String passWord, double consumAmount, double money, int realTalkTime, int realSMSCount, int realFlow, ServicePackage serPackage) {
         this.cardNumber = cardNumber;
         this.userName = userName;
         this.passWord = passWord;
@@ -68,7 +69,7 @@ public class MobileCard implements Serializable {
         this.realTalkTime = realTalkTime;
         this.realSMSCount = realSMSCount;
         this.realFlow = realFlow;
-        this.setPackage = setPackage;
+        this.serPackage = serPackage;
     }
 
     public String getCardNumber() {
@@ -135,21 +136,21 @@ public class MobileCard implements Serializable {
         this.realFlow = realFlow;
     }
 
-    public ServicePackage getSetPackage() {
-        return setPackage;
+    public ServicePackage getSerPackage() {
+        return serPackage;
     }
 
-    public void setSetPackage(ServicePackage setPackage) {
-        this.setPackage = setPackage;
+    public void setSerPackage(ServicePackage serPackage) {
+        this.serPackage = serPackage;
     }
 
     /**
      * 显示电话卡信息
      */
     public void showMeg() {
-        System.out.println("\n卡号：" + this.getCardNumber() +
-                "\n套餐类型:" + this.getSetPackage().getName() +
-                "\n用户名：" + this.getUserName() +
-                "\n当前余额：" + this.getMoney() + "元");
+        System.out.println("\n卡号：" + this.getCardNumber()
+                + "\n套餐类型:" + this.getSerPackage().getName()
+                + "\n用户名：" + this.getUserName()
+                + "\n当前余额：" + this.getMoney() + "元");
     }
 }
