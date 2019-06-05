@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class NetPackage extends ServicePackage
         implements NetService, Serializable {
 
-    private int flow = 3072;
+    private int flow = 5120;//流量
 
     private double price = 68;
 

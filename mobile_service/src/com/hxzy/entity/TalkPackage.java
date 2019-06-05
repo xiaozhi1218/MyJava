@@ -15,7 +15,7 @@ public class TalkPackage extends ServicePackage
 
     private int talkTime = 500;
 
-    private int smsCount = 30;
+    private int smsCount = 50;//短信数量
 
     private double price = 58;
 
@@ -28,7 +28,7 @@ public class TalkPackage extends ServicePackage
     public TalkPackage(int talkTime, int smsCount, double price, String name) {
         super(58, "话唠套餐");
         this.talkTime = 500;
-        this.smsCount = 30;
+        this.smsCount = 50;
         this.price = 58;
         this.name = "话唠套餐";
     }
@@ -36,7 +36,7 @@ public class TalkPackage extends ServicePackage
     public TalkPackage(int talkTime, int smsCount, double price) {
         super(58, "话唠套餐");
         this.talkTime = 500;
-        this.smsCount = 30;
+        this.smsCount = 50;
         this.price = 58;
     }
 

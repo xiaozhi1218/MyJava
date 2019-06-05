@@ -28,7 +28,6 @@ public class MobileMain implements Serializable {
         CardUtil.saveData();
         MobileMain mobileMain = new MobileMain();
         mobileMain.mainMenu();
-
     }
 
     /**
@@ -74,6 +73,7 @@ public class MobileMain implements Serializable {
                 case 6:
                     System.out.println("谢谢使用！");
                     System.exit(0);
+
             }
 
         }
@@ -96,35 +96,19 @@ public class MobileMain implements Serializable {
      * 注册二级菜单
      */
     private void registerCard() {
-        //Scanner scanner1 = new Scanner(System.in);
+
         MobileCard mobileCard = new MobileCard();
         System.out.println("*******可选择的卡号*******");
         //
         String[] cardNumber = CardUtil.getNewNumbers(9);
         for (int i = 0; i < cardNumber.length; i++) {
-            System.out.println((i + 1) + "." + cardNumber[i] + "\t");
+            System.out.print((i + 1) + "." + cardNumber[i] + "\t");
+            if ((i + 1) % 3 == 0) {
+                System.out.println();
+            }
         }
         System.out.println("请选择卡号（输入序号1-9）：");
         int input = 0;
-
-        //input = scanner.nextInt();
-       /* try {
-            while (true) {
-                input = scanner.nextInt();
-                if (input >= 1 && input <= 9) {
-                    //存卡号
-                    mobileCard.setCardNumber(cardNumber[input - 1]);
-                    System.out.println("1.话唠套餐 2.网虫套餐 3.超人套餐，请选择套餐：");
-                    break;
-                } else {
-                    System.out.println("请重新输入,（数字1-9）：");
-                    input = scanner.nextInt();
-                }
-            }
-        }
-        catch (InputMismatchException e){
-            e.printStackTrace();
-        }*/
         while (true) {
             try {
                 input = scanner.nextInt();
@@ -135,8 +119,6 @@ public class MobileMain implements Serializable {
                     break;
                 } else {
                     System.out.println("请重新输入（数字1-9）：");
-                    //input = scanner.nextInt();
-                    //continue;
                 }
             } catch (InputMismatchException e) {
                 System.out.println("请重新输入（数字1-9）：");
@@ -149,9 +131,8 @@ public class MobileMain implements Serializable {
             try {
                 packageNum = scanner.nextInt();
                 if (packageNum <= 3 && packageNum >= 1) {
-                    //存套餐
-                    servicePackage = CardUtil.createPackage(packageNum);
-                    mobileCard.setSerPackage(servicePackage);
+                    servicePackage = CardUtil.createPackage(packageNum);//创建套餐
+                    mobileCard.setSerPackage(servicePackage);//给卡设置套餐类型
                     break;
                 } else {
                     System.out.println("请重新输入（数字1-3）：");
@@ -184,15 +165,13 @@ public class MobileMain implements Serializable {
                 scanner.nextLine();
             }
         }
-
-        //现在的余额是是减去月租后的
-        mobileCard.setMoney(money - servicePackage.getPrice());
-        //新对象
+        mobileCard.setMoney(money - servicePackage.getPrice());//设置卡的余额，等于充值金额减去套餐费用
+        //将卡的信息存入一张新卡里面
         MobileCard card = new MobileCard(mobileCard.getCardNumber(), userName, passWord, mobileCard.getMoney(), mobileCard.getSerPackage());
         CardUtil.addCard(card);
         CardUtil.saveData();
         System.out.println("注册完成！");
-        card.showMeg();
+        card.showMeg();//打印卡的信息
     }
 
     /**
@@ -213,15 +192,14 @@ public class MobileMain implements Serializable {
             System.out.println("*******************嗖嗖移动用户菜单*******************");
             System.out.println("1.本月账单查询\n2.套餐余量查询\n3.打印消费详单\n4.套餐变更\n5.办理退网");
             System.out.println("请选择，输入6返回上一级");
+
             int input = 0;
-            //抓输入错误异常
             while (true) {
                 try {
                     input = scanner.nextInt();
                 } catch (InputMismatchException e) {
                     System.out.println("请输入数字1-6！");
                     scanner.nextLine();
-                    //input = scanner.nextInt();
                 }
                 if (1 <= input && 6 >= input) {
                     break;
@@ -250,8 +228,7 @@ public class MobileMain implements Serializable {
                     new MobileMain().mainMenu();
                     break;
             }
-        }
-        while (true);
+        } while (true);
     }
 
     /**
@@ -274,6 +251,7 @@ public class MobileMain implements Serializable {
 
     /**
      * 套餐变更餐单
+     *
      * @param cardNum
      */
     public void changingPackMenu(String cardNum) {

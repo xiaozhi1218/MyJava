@@ -33,11 +33,11 @@ public class MobileCard implements Serializable {
     /**
      * 用户注册
      *
-     * @param cardNumber
-     * @param userName
-     * @param passWord
-     * @param money
-     * @param serPackage
+     * @param cardNumber 卡号
+     * @param userName 用户名
+     * @param passWord 密码
+     * @param money 余额
+     * @param serPackage 所属套餐
      */
     public MobileCard(String cardNumber, String userName, String passWord, double money, ServicePackage serPackage) {
         this.cardNumber = cardNumber;
@@ -50,15 +50,15 @@ public class MobileCard implements Serializable {
     /**
      * 用户初始化信息
      *
-     * @param cardNumber
-     * @param userName
-     * @param passWord
-     * @param consumAmount
-     * @param money
-     * @param realTalkTime
-     * @param realSMSCount
-     * @param realFlow
-     * @param serPackage
+     * @param cardNumber 卡号
+     * @param userName 用户名
+     * @param passWord 密码
+     * @param consumAmount 消费金额
+     * @param money 余额
+     * @param realTalkTime 当月通话时长
+     * @param realSMSCount 当月发短信数量
+     * @param realFlow 当月上网流量
+     * @param serPackage 所属套餐
      */
     public MobileCard(String cardNumber, String userName, String passWord, double consumAmount, double money, int realTalkTime, int realSMSCount, int realFlow, ServicePackage serPackage) {
         this.cardNumber = cardNumber;

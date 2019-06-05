@@ -10,6 +10,7 @@ import java.util.*;
 
 /**
  * 操作工具类
+ *
  * @author chenyongzhi
  * @create 2019/6/3 16:16
  */
@@ -23,12 +24,12 @@ public class CardUtil implements Serializable {
 
     static File file = new File("data.dat");
 
-    static Scene scene1 = new Scene("通话",100,"给朋友打电话，通话100分钟");
-    static Scene scene2 = new Scene("通话",20,"给家人打电话，通话20分钟");
-    static Scene scene4 = new Scene("短信",10,"给父母发短信，发送短信10条");
-    static Scene scene3 = new Scene("短信",100,"给朋友发短信，发送短信100条");
-    static Scene scene5 = new Scene("上网",2*1024,"看电影，使用流量2GB");
-    static Scene scene6 = new Scene("上网",500,"玩游戏，使用流量500MB");
+    static Scene scene1 = new Scene("通话", 100, "通话100分钟");
+    static Scene scene2 = new Scene("通话", 20, "通话20分钟");
+    static Scene scene4 = new Scene("短信", 10, "发送短信10条");
+    static Scene scene3 = new Scene("短信", 100, "发送短信100条");
+    static Scene scene5 = new Scene("上网", 2 * 1024, "使用流量2GB");
+    static Scene scene6 = new Scene("上网", 500, "使用流量500MB");
 
     /**
      * 保存信息
@@ -63,7 +64,6 @@ public class CardUtil implements Serializable {
     /**
      * 初始化用户信息
      */
-    //
     public static void initScene() {
 
     }
@@ -78,7 +78,7 @@ public class CardUtil implements Serializable {
         return false;
     }
 
-    //话费充值确认
+
     public static boolean isExistCard(String number) {
         Set<String> numbers = cards.keySet();
         Iterator<String> iterator = numbers.iterator();
@@ -296,13 +296,22 @@ public class CardUtil implements Serializable {
      * 资费说明
      */
     public static void showDescription() {
+//        try {
+//            BufferedReader br = new BufferedReader(new FileReader("资费说明.txt"));
+//            String data;
+//            while ((data = br.readLine()) != null) {
+//                System.out.println(data);
+//            }
+//            br.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         try {
             BufferedReader br = new BufferedReader(new FileReader("资费说明.txt"));
             String data;
             while ((data = br.readLine()) != null) {
                 System.out.println(data);
             }
-            br.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -381,11 +390,12 @@ public class CardUtil implements Serializable {
      */
     public static void printConsumInfo(String number) {
         try {
-            BufferedWriter br = new BufferedWriter(new FileWriter("test.txt"));
+            BufferedWriter br = new BufferedWriter(new FileWriter("消费清单.txt"));
             Set<String> numbers = consumeInfos.keySet();
             Iterator<String> iterator = numbers.iterator();
-            List<ConsumInfo> infos = new ArrayList<>();
-            infos = consumeInfos.get(number);
+            List<ConsumInfo> infos = consumeInfos.get(number);
+            //List<ConsumInfo> infos = new ArrayList<>();
+            //infos = consumeInfos.get(number);
             boolean isExist = false;
             while (iterator.hasNext()) {
                 String numberKey = iterator.next();

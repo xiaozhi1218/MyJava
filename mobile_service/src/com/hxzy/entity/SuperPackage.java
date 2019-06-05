@@ -16,9 +16,9 @@ public class SuperPackage extends ServicePackage
 
     private int talkTime = 200;
 
-    private int smsCount = 50;
+    private int smsCount = 100;//短信条数
 
-    private int flow = 1024;
+    private int flow = 1024;//流量
 
     private double price = 78;
 
