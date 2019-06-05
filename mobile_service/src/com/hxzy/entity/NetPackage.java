@@ -6,19 +6,28 @@ import java.io.Serializable;
 
 /**
  * 网虫套餐
+ *
  * @author chenyongzhi
  * @create 2019/6/3 15:46
  */
-public class NetPackage extends ServicePackage
-        implements NetService, Serializable {
+public class NetPackage extends ServicePackage implements NetService, Serializable {
 
-    private int flow = 5120;//流量
+    private int flow = 3072;
 
     private double price = 68;
 
     private String name = "网虫套餐";
 
+    /*public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }*/
+
     public NetPackage() {
+
         super(68, "网虫套餐");
     }
 
@@ -43,14 +52,16 @@ public class NetPackage extends ServicePackage
         this.flow = flow;
     }
 
-    /**
-     * 流量使用情况
-     *
-     * @param flow
-     * @param card
-     * @return 流量使用
-     */
+    /*@Override
+    public double getPrice() {
+        return price;
+    }
+
     @Override
+    public void setPrice(double price) {
+        this.price = price;
+    }*/
+    //流量使用
     public int netPlay(int flow, MobileCard card) {
         int temp = flow;
         for (int i = 0; i < flow; i++) {
@@ -58,7 +69,9 @@ public class NetPackage extends ServicePackage
             if (this.flow - card.getRealFlow() >= 1) {
                 card.setRealFlow(card.getRealFlow() + 1);
             }
-             //当流量用超，使用流量++，账号余额--，花销++
+            /*
+             * 当流量用超，使用流量++，账号余额--，花销++
+             * */
             else if (card.getMoney() >= 0.1) {
                 card.setRealFlow(card.getRealFlow() + 1);
                 card.setMoney(card.getMoney() - 0.1);
@@ -79,4 +92,5 @@ public class NetPackage extends ServicePackage
         System.out.println("网虫套餐：上网流量为：" + this.getFlow()
                 + "MB/月," + "资费为：" + this.getPrice() + "元/月");
     }
+
 }
