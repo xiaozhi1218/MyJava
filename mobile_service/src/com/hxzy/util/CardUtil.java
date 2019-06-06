@@ -144,19 +144,9 @@ public class CardUtil implements Serializable {
      */
     public static String createNumber() {
         //boolean isExist = false;
-        Random random = new Random();
+        //Random random = new Random();
         int temp = (int) ((Math.random() * 9 + 1) * 10000000);
-        String number = "139" + temp;
-        /*if(cards!=null){
-            Set<String> cardNumbers = cards.keySet();
-            for(String cards:cardNumbers){
-                if(number.equals(cardNumbers)){
-                    //isExist = true;
-                    break;
-                }
-            }
-        }*/
-        return number;
+        return "139" + temp;
     }
 
     /**
@@ -253,6 +243,7 @@ public class CardUtil implements Serializable {
      */
     public static void showAmountDetail(String number) {
         StringBuffer stringBuffer = new StringBuffer();
+        //MobileCard mobileCard = cards.get(number);
         MobileCard mobileCard = cards.get(number);
         stringBuffer.append("***********************************\n");
         stringBuffer.append("您的卡号：" + mobileCard.getCardNumber() + "\n当月账单:\n");
@@ -275,7 +266,7 @@ public class CardUtil implements Serializable {
     }
 
     /**
-     * 增加消费信息
+     * 添加消费信息
      *
      * @param number 移动卡号
      * @param info   消费信息
