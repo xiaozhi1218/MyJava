@@ -103,24 +103,6 @@ public class MobileMain implements Serializable {
         System.out.println("请选择卡号（输入序号1-9）：");
         int input = 0;
 
-        //input = scanner.nextInt();
-       /* try {
-            while (true) {
-                input = scanner.nextInt();
-                if (input >= 1 && input <= 9) {
-                    //存卡号
-                    mobileCard.setCardNumber(cardNumber[input - 1]);
-                    System.out.println("1.话唠套餐 2.网虫套餐 3.超人套餐，请选择套餐：");
-                    break;
-                } else {
-                    System.out.println("请重新输入,（数字1-9）：");
-                    input = scanner.nextInt();
-                }
-            }
-        }
-        catch (InputMismatchException e){
-            e.printStackTrace();
-        }*/
         while (true) {
             try {
                 input = scanner.nextInt();

@@ -52,32 +52,23 @@ public class NetPackage extends ServicePackage implements NetService, Serializab
         this.flow = flow;
     }
 
-    /*@Override
-    public double getPrice() {
-        return price;
-    }
-
-    @Override
-    public void setPrice(double price) {
-        this.price = price;
-    }*/
     //流量使用
     public int netPlay(int flow, MobileCard card) {
         int temp = flow;
         for (int i = 0; i < flow; i++) {
-            //当总流量多余使用流量，使用流量++
+            //使用流量低于套餐流量时，使用流量增加1
             if (this.flow - card.getRealFlow() >= 1) {
                 card.setRealFlow(card.getRealFlow() + 1);
             }
             /*
-             * 当流量用超，使用流量++，账号余额--，花销++
+             * 当流量超过套餐流量，使用流量增加1，余额减少0.1，消费增加0.1
              * */
             else if (card.getMoney() >= 0.1) {
                 card.setRealFlow(card.getRealFlow() + 1);
                 card.setMoney(card.getMoney() - 0.1);
                 card.setConsumAmount(card.getConsumAmount() + 0.1);
             }
-            //当账号没钱时，提示充值
+            //当账号余额不足时，提示充值
             else {
                 temp = i;
                 System.out.println("流量已经使用" + i + "MB，您的余额不足，请充值后使用！");

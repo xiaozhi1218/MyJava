@@ -76,7 +76,8 @@ public class TalkPackage extends ServicePackage implements CallService, SendServ
     }*/
 
     public void showInfo() {
-        System.out.println("话唠套餐：通话时长为：" + this.getTalkTime() + "分钟/月,短信条数为："
+        System.out.println("话唠套餐：通话时长为：" + this.getTalkTime()
+                + "分钟/月,短信条数为："
                 + this.getSmsCount() + "条/月,资费为："
                 + this.getPrice() + "元/月");
     }
@@ -85,24 +86,17 @@ public class TalkPackage extends ServicePackage implements CallService, SendServ
     public int call(int minCount, MobileCard card) {
         int temp = minCount;
         for (int i = 0; i < minCount; i++) {
-            /*
-             * 当套餐总通话事件大于实际通话时间，实际通话事件++
-             * */
+            //当套餐总通话时间大于实际通话时间，实际通话时间增加
             if (this.talkTime - card.getRealTalkTime() >= 1) {
                 card.setRealTalkTime(card.getRealTalkTime() + 1);
             }
-            /*
-             * 如果话费用完，还剩余额的话，通话++，余额--，花费++
-             * */
+            //如果套餐通话费用完，还剩余额的话，通话时间增加，余额减少，消费增加
             else if (card.getMoney() >= 0.2) {
                 card.setRealTalkTime(card.getRealTalkTime() + 1);
                 card.setMoney(card.getMoney() - 0.2);
                 card.setConsumAmount(card.getConsumAmount() + 0.2);
             }
-            /*
-             *
-             * 如果余额不够的话
-             * */
+            //余额不够提示充值
             else {
                 temp = i;
                 System.out.println("您已通话：" + i + "分钟，您的余额不足，请充值。");
@@ -116,24 +110,17 @@ public class TalkPackage extends ServicePackage implements CallService, SendServ
     public int send(int smsCount, MobileCard card) {
         int temp = smsCount;
         for (int i = 0; i < smsCount; i++) {
-            /*
-             * 短信充足，使用短信++
-             *
-             * */
+            //套餐短信数充足，使用短信条数增加
             if (this.smsCount - card.getRealSMSCount() >= 1) {
                 card.setRealSMSCount(card.getRealSMSCount() + 1);
             }
-            /*
-             * 短信不够，剩余余额
-             * */
+            //短信条数超过套餐条数，实际条数增加，消费增加
             else if (card.getMoney() >= 0.1) {
                 card.setRealSMSCount(card.getRealSMSCount() + 1);
                 card.setMoney(card.getMoney() - 0.1);
                 card.setConsumAmount(card.getConsumAmount() + 0.1);
             }
-            /*
-             * 余额不够
-             * */
+            //余额不够，提示充值
             else {
                 temp = i;
                 System.out.println("您短信已经发送了" + i + "条，您的余额不足，请充值后再使用");

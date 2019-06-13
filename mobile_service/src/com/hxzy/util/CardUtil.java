@@ -34,7 +34,8 @@ public class CardUtil implements Serializable {
      */
     public static void saveData() {
         try {
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
+            ObjectOutputStream oos = new ObjectOutputStream(
+                    new FileOutputStream(file));
             oos.writeObject(cards);
             oos.close();
         } catch (IOException e) {
@@ -48,7 +49,8 @@ public class CardUtil implements Serializable {
     public static void loadData() {
         if (file.length() != 0) {
             try {
-                ObjectInput oi = new ObjectInputStream(new FileInputStream(file));
+                ObjectInput oi = new ObjectInputStream(
+                        new FileInputStream(file));
                 cards = (Map<String, MobileCard>) oi.readObject();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -143,8 +145,6 @@ public class CardUtil implements Serializable {
      * @return 卡号
      */
     public static String createNumber() {
-        //boolean isExist = false;
-        //Random random = new Random();
         int temp = (int) ((Math.random() * 9 + 1) * 10000000);
         return "139" + temp;
     }
@@ -209,28 +209,34 @@ public class CardUtil implements Serializable {
         if (servicePackage instanceof NetPackage) {
             //向下转型
             NetPackage netPackage = (NetPackage) servicePackage;
-            remainFlow = netPackage.getFlow() > card.getRealFlow() ? netPackage.getFlow() - card.getRealFlow() : 0;
+            remainFlow = netPackage.getFlow() > card.getRealFlow() ?
+                    netPackage.getFlow() - card.getRealFlow() : 0;
             stringBuffer.append("上网流量：" + (remainFlow / 1024) + "GB");
         } else if (servicePackage instanceof TalkPackage) {
             //向下转型
             TalkPackage talkPackage = (TalkPackage) servicePackage;
-            remainTalkTime = talkPackage.getTalkTime() > card.getRealTalkTime() ? talkPackage.getTalkTime() - card.getRealTalkTime() : 0;
+            remainTalkTime = talkPackage.getTalkTime() > card.getRealTalkTime() ?
+                    talkPackage.getTalkTime() - card.getRealTalkTime() : 0;
             stringBuffer.append("通话时长：" + remainTalkTime + "分钟\n");
 
-            remainSmsCount = talkPackage.getSmsCount() > card.getRealSMSCount() ? talkPackage.getSmsCount() - card.getRealSMSCount() : 0;
+            remainSmsCount = talkPackage.getSmsCount() > card.getRealSMSCount() ?
+                    talkPackage.getSmsCount() - card.getRealSMSCount() : 0;
             stringBuffer.append("短信条数：" + remainSmsCount + "条");
 
         } else {
             //向下转型
             SuperPackage superPackage = (SuperPackage) servicePackage;
 
-            remainTalkTime = superPackage.getTalkTime() > card.getRealTalkTime() ? superPackage.getTalkTime() - card.getRealTalkTime() : 0;
+            remainTalkTime = superPackage.getTalkTime() > card.getRealTalkTime() ?
+                    superPackage.getTalkTime() - card.getRealTalkTime() : 0;
             stringBuffer.append("通话时长：" + remainTalkTime + "分钟\n");
 
-            remainSmsCount = superPackage.getSmsCount() > card.getRealSMSCount() ? superPackage.getSmsCount() - card.getRealSMSCount() : 0;
+            remainSmsCount = superPackage.getSmsCount() > card.getRealSMSCount() ?
+                    superPackage.getSmsCount() - card.getRealSMSCount() : 0;
             stringBuffer.append("短信条数：" + remainSmsCount + "条\n");
 
-            remainFlow = superPackage.getFlow() > card.getRealFlow() ? superPackage.getFlow() - card.getRealFlow() : 0;
+            remainFlow = superPackage.getFlow() > card.getRealFlow() ?
+                    superPackage.getFlow() - card.getRealFlow() : 0;
             stringBuffer.append("上网流量：" + remainFlow / 1024 + "GB");
         }
         System.out.println(stringBuffer);
@@ -243,13 +249,13 @@ public class CardUtil implements Serializable {
      */
     public static void showAmountDetail(String number) {
         StringBuffer stringBuffer = new StringBuffer();
-        //MobileCard mobileCard = cards.get(number);
         MobileCard mobileCard = cards.get(number);
         stringBuffer.append("***********************************\n");
         stringBuffer.append("您的卡号：" + mobileCard.getCardNumber() + "\n当月账单:\n");
         stringBuffer.append("您的套餐：" + mobileCard.getSerPackage().getName() + "\n");
         stringBuffer.append("套餐资费：" + mobileCard.getSerPackage().getPrice() + "元\n");
-        stringBuffer.append("合计:" + dataFormat((mobileCard.getConsumAmount() + mobileCard.getSerPackage().getPrice())) + "元\n");
+        stringBuffer.append("合计:" + dataFormat((mobileCard.getConsumAmount()
+                + mobileCard.getSerPackage().getPrice())) + "元\n");
         stringBuffer.append("账号余额:" + dataFormat(mobileCard.getMoney()) + "元");
         System.out.println(stringBuffer);
     }
@@ -365,7 +371,8 @@ public class CardUtil implements Serializable {
     public static void showDescription() {
         BufferedReader bufferedReader;
         try {
-            bufferedReader = new BufferedReader(new FileReader("mobile_service\\src\\资费说明.txt"));
+            bufferedReader = new BufferedReader(
+                    new FileReader("mobile_service\\src\\资费说明.txt"));
             String line = null;
             while ((line = bufferedReader.readLine()) != null) {
                 System.out.println(line);
