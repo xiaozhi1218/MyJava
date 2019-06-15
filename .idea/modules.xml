@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/exercise/exercise.iml" filepath="$PROJECT_DIR$/exercise/exercise.iml" />
       <module fileurl="file://$PROJECT_DIR$/javaoop/javaoop.iml" filepath="$PROJECT_DIR$/javaoop/javaoop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jdbc/jdbc.iml" filepath="$PROJECT_DIR$/jdbc/jdbc.iml" />
       <module fileurl="file://$PROJECT_DIR$/mobile_service/mobile_service.iml" filepath="$PROJECT_DIR$/mobile_service/mobile_service.iml" />
       <module fileurl="file://$PROJECT_DIR$/myjava.iml" filepath="$PROJECT_DIR$/myjava.iml" />
     </modules>
