@@ -42,8 +42,22 @@ public class DateTimeTest {
         System.out.println(date3);
 
         //如何将java.util.Date对象转换为java.sql.Date对象
+        //情况一
         Date date4 = new java.sql.Date(13242342344L);
+        java.sql.Date date5 = (java.sql.Date) date4;
+        //情况二
+        Date date6 = new Date();
+        java.sql.Date date7 = new java.sql.Date(date6.getTime());
 
+    }
 
+    //1.System类中的currentTimeMillis()
+    @Test
+    public void test2() {
+        long time = System.currentTimeMillis();
+        //返回当前时间与1970年1月1日0时0分0秒之间以毫秒为单位的时间差。
+        //称为时间戳
+        System.out.println(time);
+        System.out.println(new Date().getTime());
     }
 }
