@@ -121,6 +121,6 @@ public class StringTest {
 
         final String s4 = "java";//s4:常量
         String s5 = s4 + "hadoop";
-        System.out.println(s1 == s5);
+        System.out.println(s1 == s5);//true
     }
 }
