@@ -1,8 +1,7 @@
 package util;
 
-import java.io.FileReader;
 import java.io.IOException;
-import java.net.URL;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.Properties;
 
@@ -18,24 +17,30 @@ public class JDBCUtils {
     private static String driver;
 
     /**
-     * 文件的读取，只需要读取一次即可拿到这些值。使用静态代码块
+     * 文件的读取，只需要读取一次即可获取到这些值。使用静态代码块
      */
     static {
         //读取资源文件，获取值。
         try {
             //1.读取资源文件，获取值
-            Properties pro = new Properties();
+            Properties pros = new Properties();
             //获取src路径下的文件的方式--->ClassLoader 类加载器
+//            ClassLoader classLoader = JDBCUtils.class.getClassLoader();
+//            URL res = classLoader.getResource("jdbc.properties");
+//            String path = res.getPath();
+            //或者下面方式：这种方式配置文件默认识别为：当前module的src路径下
             ClassLoader classLoader = JDBCUtils.class.getClassLoader();
-            URL res = classLoader.getResource("jdbc.properties");
-            String path = res.getPath();
+            InputStream is = classLoader.getResourceAsStream("jdbc.properties");
+            //InputStream is = JDBCUtils.class.getResourceAsStream("jdbc.properties");
+
             //2. 加载文件
-            pro.load(new FileReader(path));
+            //pro.load(new FileReader(path));
+            pros.load(is);
             //3.获取数据，赋值
-            url = pro.getProperty("url");
-            user = pro.getProperty("user");
-            password = pro.getProperty("password");
-            driver = pro.getProperty("driver");
+            url = pros.getProperty("url");
+            user = pros.getProperty("user");
+            password = pros.getProperty("password");
+            driver = pros.getProperty("driver");
             //4.注册驱动
             Class.forName(driver);
         } catch (IOException e) {

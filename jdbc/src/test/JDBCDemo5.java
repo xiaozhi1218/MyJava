@@ -31,9 +31,9 @@ public class JDBCDemo5 {
         List<employee> list = null;
 
         try {
-            /*Class.forName("com.mysql.jdbc.Driver");
-
-            conn = DriverManager.getConnection("jdbc:mysql:///myemployees", "root", "root");*/
+//            Class.forName("com.mysql.jdbc.Driver");
+//
+//            conn = DriverManager.getConnection("jdbc:mysql:///myemployees", "root", "root");
             conn = JDBCUtils.getConnection();
 
             stmt = conn.createStatement();
