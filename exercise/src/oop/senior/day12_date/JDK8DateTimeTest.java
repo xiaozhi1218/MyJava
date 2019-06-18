@@ -56,6 +56,10 @@ public class JDK8DateTimeTest {
         LocalDate localDate1 = localDate.withDayOfMonth(22);
         System.out.println(localDate);
         System.out.println(localDate1);
+
+        LocalDateTime localDateTime2 = localDateTime.withHour(4);
+        System.out.println(localDateTime);
+        System.out.println(localDateTime2);
     }
 
 }
