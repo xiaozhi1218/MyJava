@@ -2,6 +2,7 @@ package oop.senior.day12_date;
 
 import org.junit.Test;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -60,6 +61,31 @@ public class JDK8DateTimeTest {
         LocalDateTime localDateTime2 = localDateTime.withHour(4);
         System.out.println(localDateTime);
         System.out.println(localDateTime2);
+
+        //不可变性
+        LocalDateTime localDateTime3 = localDateTime.plusMonths(3);
+        System.out.println(localDateTime);
+        System.out.println(localDateTime3);
+
+        LocalDateTime localDateTime4 = localDateTime.minusDays(6);
+        System.out.println(localDateTime);
+        System.out.println(localDateTime4);
     }
+
+    /*
+    Instant的使用
+    类似于 java.util.Date类
+
+     */
+    @Test
+    public void test3() {
+
+        //now():获取本初子午线对应的标准时间
+        Instant instant = Instant.now();
+        System.out.println(instant);
+
+    }
+
+
 
 }
