@@ -1,15 +1,17 @@
 package com.hx.web.servlet;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
 
 /**
- * servlet快速入门
+ * Servlet使用注解配置资源路径(url-pattern)
  *
  * @author chenyongzhi
- * @create 2019/6/28 9:53
+ * @create 2019/6/29 12:49
  */
-public class ServletDemo1 implements Servlet {
+@WebServlet("/demo2")
+public class ServletDemo implements Servlet {
     @Override
     public void init(ServletConfig servletConfig) throws ServletException {
 
@@ -20,10 +22,9 @@ public class ServletDemo1 implements Servlet {
         return null;
     }
 
-    //提供服务的方法
     @Override
     public void service(ServletRequest servletRequest, ServletResponse servletResponse) throws ServletException, IOException {
-        System.out.println("hello servlet");
+        System.out.println("Servlet3.0来了.....");
     }
 
     @Override

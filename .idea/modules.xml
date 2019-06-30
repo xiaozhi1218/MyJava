@@ -9,6 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/jdbc_dao/jdbc_dao.iml" filepath="$PROJECT_DIR$/jdbc_dao/jdbc_dao.iml" />
       <module fileurl="file://$PROJECT_DIR$/mobile_service/mobile_service.iml" filepath="$PROJECT_DIR$/mobile_service/mobile_service.iml" />
       <module fileurl="file://$PROJECT_DIR$/myjava.iml" filepath="$PROJECT_DIR$/myjava.iml" />
+      <module fileurl="file://$PROJECT_DIR$/servlet/servlet.iml" filepath="$PROJECT_DIR$/servlet/servlet.iml" />
       <module fileurl="file://$PROJECT_DIR$/tomcat/tomcat.iml" filepath="$PROJECT_DIR$/tomcat/tomcat.iml" />
       <module fileurl="file://$PROJECT_DIR$/xml/xml.iml" filepath="$PROJECT_DIR$/xml/xml.iml" />
     </modules>
