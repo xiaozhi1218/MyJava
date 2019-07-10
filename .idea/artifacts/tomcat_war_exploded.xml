@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="tomcat:war exploded">
+  <artifact type="exploded-war" build-on-make="true" name="tomcat:war exploded">
     <output-path>$PROJECT_DIR$/out/artifacts/tomcat_war_exploded</output-path>
     <root id="root">
       <element id="javaee-facet-resources" facet="tomcat/web/Web" />
@@ -8,6 +8,7 @@
           <element id="module-output" name="tomcat" />
         </element>
       </element>
+      <element id="dir-copy" path="E:/" />
     </root>
   </artifact>
 </component>
